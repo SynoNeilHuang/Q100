@@ -5,16 +5,16 @@
 
 using namespace std;
 
-int numOf1(int input) {
+unsigned long int numOf1(int input) {
 	assert(input > 0);
 
-	int ret(0);
-	int index(0);
+	unsigned long int ret(0);
+	unsigned int index(0);
 
-	while (input/pow(10, index) > 1) {
-		int base = pow(10 ,index);
-		int cur_loc = (input / base) % 10;
-		int iter(0);
+	while (input/pow(10, index) >= 1) {
+		unsigned long int base = pow(10 ,index);
+		unsigned int cur_loc = (input / base) % 10;
+		unsigned long int iter(0);
 		if (0 == cur_loc) {
 			iter = (input / (base * 10)) * base;
 		} else if (1 == cur_loc) {
