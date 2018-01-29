@@ -9,11 +9,11 @@ void Reorder(vector<int>& input) {
 	size_t end = input.size() - 1;
 
 	while (front < end) {
-		while (1 == (input[front] % 2)) {
+		while (input[front] & 1) {
 			++front;
 		}
 
-		while (0 == (input[end] % 2)) {
+		while (!(input[end] & 1)) {
 			--end;
 		}
 
