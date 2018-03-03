@@ -2,30 +2,26 @@
 #include <vector>
 #include <string>
 #include <math.h>
+#include <sstream>
 
 using std::cout;
 using std::endl;
 using std::vector;
 using std::string;
-
-string intToStr(const int& input) {
-	int transInt(input);
-	string ret;
-	while((transInt % 10) > 0) {
-		string tmp(1, (transInt % 10) + '0');
-		ret = tmp + ret;
-		transInt = transInt / 10;
-	}
-	return ret;
-}
+using std::stringstream;
 
 bool combineSmall(const vector<int>& input, string& ret) {
 	if (input.size() > 2) {
 		return false;
 	}
+
 	vector<string> vInput;
 	for (const auto& idx : input) {
-		vInput.push_back(intToStr(idx));
+		string intToStr;
+		stringstream ss;
+		ss << idx;
+		ss >> intToStr;
+		vInput.push_back(intToStr);
 	}
 	string str01(vInput[0] + vInput[1]);
 	string str10(vInput[1] + vInput[0]);
