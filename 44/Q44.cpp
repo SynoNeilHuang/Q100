@@ -22,7 +22,6 @@ double Power(double base, int exp) {
 
 }
 
-
 double PowerArray(const double& base, const int& exp) {
 	if (0 == base || 1 == base) {
 		return base;
@@ -55,8 +54,44 @@ double PowerArray(const double& base, const int& exp) {
 		ret = 1 / ret;
 	}
 	return ret;
-
 }
+
+double PowerRecursive(double base, const int& exp) {
+	if (1 == base || 0 == base) {
+		return base;
+	}
+
+	if (0 == exp) {
+		return 1;
+	}
+
+	bool negative = false;
+	int absExp = abs(exp);
+	if (0 > exp) {
+		negative = true;
+	}
+
+	if (1 == absExp) {
+		if (negative)
+			return 1/base;
+		else
+			return base;
+	}
+
+	double result(0);
+	if (absExp & 0x1) {
+		double tmp = PowerRecursive(base, (absExp - 1) >> 1);
+		result = base * tmp * tmp;
+	} else {
+		double tmp = PowerRecursive(base , absExp >> 1);
+		result = tmp * tmp;
+	}
+	if (negative)
+		return 1/result;
+	else
+		return result;
+}
+
 int main() {
-	cout << Power(2, 20) << endl;
+	cout << PowerRecursive(2, -3) << endl;
 }
