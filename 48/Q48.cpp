@@ -46,14 +46,6 @@ shared_ptr<TreeNode<T>> getCommonParent(const shared_ptr<TreeNode<T>>& node1,
 	vector<shared_ptr<TreeNode<T>>> Node2path;
 	FindNode(node1, pHead, Node1path);
 	FindNode(node2, pHead, Node2path);
-	for (const auto& idx : Node1path) {
-		cout << idx->value << " ";
-	}
-	cout << endl;
-	for (const auto& idx : Node2path) {
-		cout << idx->value << " ";
-	}
-	cout << endl;
 	shared_ptr<TreeNode<T>> CmnNode(nullptr);
 	while(Node1path.back() == Node2path.back()) {
 		CmnNode = Node1path.back();
