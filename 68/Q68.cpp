@@ -21,9 +21,8 @@ int deleteAndEarn(vector<int>& nums) {
     vector<int> dp(maxValue+1, 0);
     dp.at(0) = 0;
     dp.at(1) = numRecord.at(1);
-    dp.at(2) = max(2 * numRecord.at(2), numRecord.at(1));
-    for (int i = 3 ; i <= maxValue ; ++i) {
-	dp.at(i) = max(i * numRecord.at(i) + dp.at(i-2), (i-1) * numRecord.at(i-1) + dp.at(i-3));
+    for (int i = 2 ; i <= maxValue ; ++i) {
+	dp.at(i) = max(i * numRecord.at(i) + dp.at(i-2), dp.at(i-1));
     }
     return dp.at(maxValue);
 }
