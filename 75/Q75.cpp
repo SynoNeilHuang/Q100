@@ -28,25 +28,23 @@ using std::min;
 int minDistance(string word1, string word2) {
     int m = word1.size();
     int n = word2.size();
-    vector<vector<int>> dp(m+1 ,vector<int>(n+1, 0));
+    vector<int> dp(n+1, 0);
+    for (int i = 0 ; i <= n ; ++i)
+	dp.at(i) = i;
 
-    for (int i = 0 ; i <= m ; ++i) {
+    for (int i = 1 ; i <= m ; ++i) {
+	vector<int> last(dp);
 	for (int j = 0 ; j <= n ; ++j) {
-	    if (i == 0 && j == 0) dp.at(i).at(j) = 0;
-	    if (i == 0) {
-		dp.at(i).at(j) = j;
-	    } else if (j == 0) {
-		dp.at(i).at(j) = i;
-	    } else {
-		if (word1.at(i-1) == word2.at(j-1)) {
-		    dp.at(i).at(j) = dp.at(i-1).at(j-1);
-		} else {
-		    dp.at(i).at(j) = min(dp.at(i-1).at(j) + 1, dp.at(i).at(j-1) + 1);
-		}
+	    if (j == 0) dp.at(j) = i;
+	    else {
+		if (word1.at(i-1) == word2.at(j-1))
+		    dp.at(j) = last.at(j-1);
+		else
+		    dp.at(j) = min(last.at(j) + 1, dp.at(j-1) + 1);
 	    }
 	}
     }
-    return dp.at(m).at(n);
+    return dp.at(n);
 }
 
 int main() {
